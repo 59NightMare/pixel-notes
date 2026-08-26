@@ -16,8 +16,8 @@ const isEnglish = lang === 'en'
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
 const alternate = new URL(alternatePath, Astro.site ?? Astro.url.origin)
 const shareImage = new URL(ogImage, Astro.site ?? Astro.url.origin)
-const newsletterAction = import.meta.env.PUBLIC_NEWSLETTER_ACTION
-const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN
+const buttondownUsername = import.meta.env.PUBLIC_BUTTONDOWN_USERNAME
+const analyticsToken = import.meta.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN
 ---
 <!doctype html>
 <html lang={lang}>
@@ -31,7 +31,7 @@ const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN
       <HeaderActions client:load lang={isEnglish ? 'en' : 'zh'} />
     </div></header>
     <slot />
-    <footer id="about" class="site-footer" data-pagefind-ignore><div class="container">{!isEnglish && <NewsletterForm client:load action={newsletterAction} compact />}<div class="footer-grid"><div><strong class="brand">PIXEL NOTES</strong><p>{isEnglish ? 'Written and maintained by A-Che in Shanghai.' : '由阿澈在上海持续写作与维护。'}</p></div><nav class="footer-links" aria-label={isEnglish ? 'Footer navigation' : '页脚导航'}><Link href={isEnglish ? '/en/archive/' : '/archive/'}>{isEnglish ? 'Archive' : '归档'}</Link><Link href="/rss.xml">RSS</Link><Link href="/privacy/">{isEnglish ? 'Privacy' : '隐私'}</Link><Link href="/admin/">CMS</Link></nav></div></div></footer>
+    <footer id="about" class="site-footer" data-pagefind-ignore><div class="container">{!isEnglish && <NewsletterForm client:load username={buttondownUsername} compact />}<div class="footer-grid"><div><strong class="brand">PIXEL NOTES</strong><p>{isEnglish ? 'Written and maintained by A-Che in Shanghai.' : '由阿澈在上海持续写作与维护。'}</p></div><nav class="footer-links" aria-label={isEnglish ? 'Footer navigation' : '页脚导航'}><Link href={isEnglish ? '/en/archive/' : '/archive/'}>{isEnglish ? 'Archive' : '归档'}</Link><Link href="/rss.xml">RSS</Link><Link href="/privacy/">{isEnglish ? 'Privacy' : '隐私'}</Link><Link href="/admin/">CMS</Link></nav></div></div></footer>
     <BackTopControl client:load />
   </body>
 </html>

@@ -1,0 +1,54 @@
+backend:
+  name: github
+  repo: owner/pixel-notes
+  branch: main
+  squash_merges: true
+
+publish_mode: editorial_workflow
+media_folder: public/images/posts/uploads
+public_folder: /images/posts/uploads
+
+collections:
+  - name: posts
+    label: 中文文章
+    folder: src/content/posts
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    fields:
+      - { label: 标题, name: title, widget: string }
+      - { label: 摘要, name: summary, widget: text }
+      - { label: 发布日期, name: publishedAt, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - { label: 更新日期, name: updatedAt, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
+      - { label: 分类, name: category, widget: select, options: [技术笔记, 设计观察, 游戏与像素, 随笔] }
+      - { label: 标签, name: tags, widget: select, multiple: true, options: [像素设计, 前端开发, Astro, 界面设计, 游戏设计, 写作, 知识管理, 个人网站] }
+      - { label: 精选, name: featured, widget: boolean, default: false }
+      - { label: 草稿, name: draft, widget: boolean, default: false }
+      - { label: 阅读分钟数, name: readingTime, widget: number, value_type: int, min: 1 }
+      - { label: 封面, name: cover, widget: image }
+      - { label: 分享图, name: ogImage, widget: image, required: false }
+      - { label: 封面替代文本, name: coverAlt, widget: string }
+      - { label: 正文, name: body, widget: markdown }
+
+  - name: posts_en
+    label: English Posts
+    folder: src/content/posts-en
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Summary, name: summary, widget: text }
+      - { label: Published, name: publishedAt, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Updated, name: updatedAt, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
+      - { label: Category, name: category, widget: select, options: [Development, Design, Games & Pixels, Essays] }
+      - { label: Tags, name: tags, widget: select, multiple: true, options: [Pixel Design, Frontend, Astro, Interface Design, Game Design, Writing, Knowledge, Personal Web] }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Reading time, name: readingTime, widget: number, value_type: int, min: 1 }
+      - { label: Cover, name: cover, widget: image }
+      - { label: Open Graph image, name: ogImage, widget: image, required: false }
+      - { label: Cover alt text, name: coverAlt, widget: string }
+      - { label: Body, name: body, widget: markdown }

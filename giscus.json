@@ -1,0 +1,5 @@
+{
+  "origins": ["https://your-domain.example"],
+  "originsRegex": ["http://127\\.0\\.0\\.1:[0-9]+", "https://.*\\.pages\\.dev"],
+  "defaultCommentOrder": "newest"
+}
