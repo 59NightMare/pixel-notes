@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { getCollection, render } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import ArticleContent from '../../components/ArticleContent.vue'
+import { serializePost, sortPosts } from '../../lib/posts'
+
+export async function getStaticPaths() {
+  const posts = sortPosts(await getCollection('posts', ({ data }) => !data.draft))
+  return posts.map((post, index) => ({ params: { id: post.id }, props: { post, previous: posts[index + 1] ?? null, next: posts[index - 1] ?? null } }))
+}
+
+interface Props { post: CollectionEntry<'posts'>; previous: CollectionEntry<'posts'> | null; next: CollectionEntry<'posts'> | null }
+const { post, previous, next } = Astro.props
+const { Content, headings } = await render(post)
+const article = serializePost(post)
+---
+<BaseLayout current="article" title={`${post.data.title} - Pixel Notes`} description={post.data.summary} ogImage={post.data.ogImage} ogType="article">
+  <ArticleContent client:load post={article} headings={headings} previous={previous ? { id: previous.id, title: previous.data.title } : null} next={next ? { id: next.id, title: next.data.title } : null}>
+    <Content />
+  </ArticleContent>
+</BaseLayout>

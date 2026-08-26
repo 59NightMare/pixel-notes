@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import ListingContent from '../../components/ListingContent.vue'
+import { counts, serializePost, sortPosts } from '../../lib/posts'
+const entries = sortPosts(await getCollection('posts', ({ data }) => !data.draft))
+const posts = entries.map(serializePost)
+const filters = counts(entries.flatMap((post) => post.data.tags)).map((item) => ({ ...item, href: `/tags/${encodeURIComponent(item.label)}/` }))
+---
+<BaseLayout title="文章标签 - Pixel Notes" description="按标签浏览 Pixel Notes。"><ListingContent client:load eyebrow="TAGS" title="文章标签" description="标签是文章之间更细粒度的连接。" posts={posts} filters={filters} /></BaseLayout>

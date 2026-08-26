@@ -1,0 +1,26 @@
+{
+  "name": "pixel-notes-prototype",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "astro check && astro build && pagefind --site dist",
+    "preview": "astro preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/rss": "4.0.19",
+    "@astrojs/sitemap": "3.7.3",
+    "@astrojs/vue": "7.0.2",
+    "@pixelium/web-vue": "0.2.0-beta",
+    "astro": "7.2.7",
+    "pagefind": "1.5.2",
+    "typescript": "^5.9.2",
+    "vue": "3.5.41",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.3"
+  }
+}

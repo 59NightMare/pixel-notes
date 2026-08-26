@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import ListingContent from '../../components/ListingContent.vue'
+import { serializePost, sortPosts } from '../../lib/posts'
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft)
+  return [...new Set(posts.flatMap((post) => post.data.tags))].map((tag) => ({ params: { tag }, props: { tag } }))
+}
+const { tag } = Astro.props
+const posts = sortPosts(await getCollection('posts', ({ data }) => !data.draft && data.tags.includes(tag))).map(serializePost)
+---
+<BaseLayout title={`#${tag} - Pixel Notes`} description={`浏览带有“${tag}”标签的文章。`}><ListingContent client:load eyebrow="TAG" title={`#${tag}`} description={`该标签共有 ${posts.length} 篇文章。`} posts={posts} /></BaseLayout>

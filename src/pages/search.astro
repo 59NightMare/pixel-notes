@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import SearchPanel from '../components/SearchPanel.vue'
+---
+<BaseLayout title="搜索 - Pixel Notes" description="搜索 Pixel Notes 的文章。"><main id="main" class="listing-shell container"><header class="listing-header"><div class="pixel-label">SEARCH</div><h1>站内搜索</h1><p>搜索标题、正文、分类和标签。</p></header><SearchPanel client:load /></main></BaseLayout>
