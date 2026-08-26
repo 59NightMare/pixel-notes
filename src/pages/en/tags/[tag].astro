@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import ListingContent from '../../../components/ListingContent.vue'
+import { orderedCounts, serializeEnglishPost, sortEnglishPosts } from '../../../lib/posts'
+import { enTags } from '../../../config/taxonomy'
+export async function getStaticPaths() {
+  const posts = await getCollection('postsEn', ({ data }) => !data.draft)
+  return [...new Set(posts.flatMap((post) => post.data.tags))].map((tag) => ({ params: { tag }, props: { tag } }))
+}
+const { tag } = Astro.props
+const entries = sortEnglishPosts(await getCollection('postsEn', ({ data }) => !data.draft))
+const posts = entries.filter((post) => post.data.tags.includes(tag)).map(serializeEnglishPost)
+const filters = orderedCounts(entries.flatMap((post) => post.data.tags), enTags).map((item) => ({ ...item, href: `/en/tags/${encodeURIComponent(item.label)}/` }))
+---
+<BaseLayout lang="en" title={`#${tag} - Pixel Notes`} description={`Browse articles tagged ${tag}.`}><ListingContent client:load lang="en" eyebrow="TAG" title={`#${tag}`} description={`${posts.length} articles use this tag.`} posts={posts} filters={filters} filterType="tag" activeFilter={tag} totalCount={entries.length} /></BaseLayout>

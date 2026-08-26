@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import ListingContent from '../../../components/ListingContent.vue'
+import { orderedCounts, serializeEnglishPost, sortEnglishPosts } from '../../../lib/posts'
+import { enCategories } from '../../../config/taxonomy'
+const entries = sortEnglishPosts(await getCollection('postsEn', ({ data }) => !data.draft))
+const posts = entries.map(serializeEnglishPost)
+const filters = orderedCounts(entries.map((post) => post.data.category), enCategories).map((item) => ({ ...item, href: `/en/categories/${encodeURIComponent(item.label)}/` }))
+---
+<BaseLayout lang="en" title="Categories - Pixel Notes" description="Browse Pixel Notes by category." alternatePath="/categories/"><ListingContent client:load lang="en" eyebrow="CATEGORIES" title="Article categories" description="Enter through stable subjects instead of an endless feed." posts={posts} filters={filters} filterType="category" totalCount={posts.length} /></BaseLayout>

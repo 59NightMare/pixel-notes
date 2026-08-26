@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import ListingContent from '../../../components/ListingContent.vue'
+import { orderedCounts, serializeEnglishPost, sortEnglishPosts } from '../../../lib/posts'
+import { enCategories } from '../../../config/taxonomy'
+export async function getStaticPaths() {
+  const posts = await getCollection('postsEn', ({ data }) => !data.draft)
+  return [...new Set(posts.map((post) => post.data.category))].map((category) => ({ params: { category }, props: { category } }))
+}
+const { category } = Astro.props
+const entries = sortEnglishPosts(await getCollection('postsEn', ({ data }) => !data.draft))
+const posts = entries.filter((post) => post.data.category === category).map(serializeEnglishPost)
+const filters = orderedCounts(entries.map((post) => post.data.category), enCategories).map((item) => ({ ...item, href: `/en/categories/${encodeURIComponent(item.label)}/` }))
+---
+<BaseLayout lang="en" title={`${category} - Pixel Notes`} description={`Browse articles in ${category}.`}><ListingContent client:load lang="en" eyebrow="CATEGORY" title={category} description={`${posts.length} articles in this category.`} posts={posts} filters={filters} filterType="category" activeFilter={category} totalCount={entries.length} /></BaseLayout>

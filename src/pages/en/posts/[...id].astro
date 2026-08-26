@@ -2,6 +2,8 @@
 import type { CollectionEntry } from 'astro:content'
 import { getCollection, render } from 'astro:content'
 import BaseLayout from '../../../layouts/BaseLayout.astro'
+import ArticleContent from '../../../components/ArticleContent.vue'
+import Comments from '../../../components/Comments.astro'
 import { serializeEnglishPost, sortEnglishPosts } from '../../../lib/posts'
 
 export async function getStaticPaths() {
@@ -11,9 +13,16 @@ export async function getStaticPaths() {
 
 interface Props { post: CollectionEntry<'postsEn'>; previous: CollectionEntry<'postsEn'> | null; next: CollectionEntry<'postsEn'> | null }
 const { post, previous, next } = Astro.props
-const { Content } = await render(post)
+const { Content, headings } = await render(post)
 const article = serializeEnglishPost(post)
+const comments = {
+  repo: import.meta.env.PUBLIC_GISCUS_REPO,
+  repoId: import.meta.env.PUBLIC_GISCUS_REPO_ID,
+  category: import.meta.env.PUBLIC_GISCUS_CATEGORY,
+  categoryId: import.meta.env.PUBLIC_GISCUS_CATEGORY_ID,
+}
 ---
 <BaseLayout lang="en" current="article" title={`${article.title} - Pixel Notes`} description={article.summary} ogImage={article.ogImage} ogImageAlt={article.coverAlt} ogType="article" alternatePath={`/posts/${post.id}/`}>
-  <main id="main" class="article-shell en-article"><article data-pagefind-body><nav class="plain-breadcrumb"><a href="/en/">Home</a><span>/</span><a href="/en/archive/">Archive</a></nav><header class="article-header"><span class="pixel-label">{article.category}</span><h1 data-pagefind-meta="title">{article.title}</h1><p class="article-summary">{article.summary}</p><div class="meta"><span>Published {article.publishedAt}</span><span>{article.readingTime} MIN READ</span></div></header><picture><source srcset={article.cover.replace(/\.png$/, '.webp')} type="image/webp"/><img class="article-cover" src={article.cover} alt={article.coverAlt} width="960" height="540"/></picture><div class="prose"><Content /></div><nav class="article-nav" aria-label="Article navigation">{previous && <a class="service-note" href={`/en/posts/${previous.id}/`}><small>Previous</small><strong>{previous.data.title}</strong></a>}{next && <a class="service-note" href={`/en/posts/${next.id}/`}><small>Next</small><strong>{next.data.title}</strong></a>}</nav></article></main>
+  <ArticleContent client:load lang="en" post={article} headings={headings} previous={previous ? { id: previous.id, title: previous.data.title } : null} next={next ? { id: next.id, title: next.data.title } : null}><Content /></ArticleContent>
+  <div class="container comments-shell"><Comments {...comments} lang="en" /></div>
 </BaseLayout>

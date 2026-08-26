@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import SearchPanel from '../../components/SearchPanel.vue'
+---
+<BaseLayout lang="en" title="Search - Pixel Notes" description="Search Pixel Notes articles." alternatePath="/search/"><main id="main" class="listing-shell search-shell container"><header class="listing-header"><div class="pixel-label">SEARCH</div><h1>Site search</h1><p>Search titles, content, categories, and tags.</p></header><SearchPanel client:load lang="en" /></main></BaseLayout>
