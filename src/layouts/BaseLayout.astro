@@ -8,15 +8,15 @@ import HeaderActions from '../components/HeaderActions.vue'
 import BackTopControl from '../components/BackTopControl.vue'
 import { Link as PixelLink } from '@pixelium/web-vue'
 
-interface Props { title: string; description: string; current?: 'home' | 'article'; canonical?: string; ogImage?: string; ogType?: 'website' | 'article' }
-const { title, description, current = 'home', ogImage = '/images/og/default.png', ogType = 'website' } = Astro.props
+interface Props { title: string; description: string; current?: 'home' | 'article'; canonical?: string; ogImage?: string; ogImageAlt?: string; ogType?: 'website' | 'article' }
+const { title, description, current = 'home', ogImage = '/images/og/default.png', ogImageAlt = 'Pixel Notes 像素风分享封面', ogType = 'website' } = Astro.props
 const Link: any = PixelLink
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
 const shareImage = new URL(ogImage, Astro.site ?? Astro.url.origin)
 ---
 <!doctype html>
 <html lang="zh-CN">
-  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content={description} /><link rel="canonical" href={canonical} /><link rel="alternate" type="application/rss+xml" title="Pixel Notes RSS" href="/rss.xml" /><meta property="og:locale" content="zh_CN" /><meta property="og:site_name" content="Pixel Notes" /><meta property="og:type" content={ogType} /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonical} /><meta property="og:image" content={shareImage} /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" /><meta property="og:image:alt" content="Pixel Notes 像素风分享封面" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={shareImage} /><title>{title}</title></head>
+  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content={description} /><link rel="canonical" href={canonical} /><link rel="alternate" type="application/rss+xml" title="Pixel Notes RSS" href="/rss.xml" /><meta property="og:locale" content="zh_CN" /><meta property="og:site_name" content="Pixel Notes" /><meta property="og:type" content={ogType} /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonical} /><meta property="og:image" content={shareImage} /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" /><meta property="og:image:alt" content={ogImageAlt} /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={shareImage} /><meta name="twitter:image:alt" content={ogImageAlt} /><title>{title}</title></head>
   <body>
     <a class="skip-link" href="#main">跳至正文</a>
     <header class="site-header"><div class="nav-shell">

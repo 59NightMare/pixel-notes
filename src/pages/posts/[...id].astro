@@ -15,7 +15,7 @@ const { post, previous, next } = Astro.props
 const { Content, headings } = await render(post)
 const article = serializePost(post)
 ---
-<BaseLayout current="article" title={`${post.data.title} - Pixel Notes`} description={post.data.summary} ogImage={post.data.ogImage} ogType="article">
+<BaseLayout current="article" title={`${post.data.title} - Pixel Notes`} description={post.data.summary} ogImage={post.data.ogImage} ogImageAlt={post.data.coverAlt} ogType="article">
   <ArticleContent client:load post={article} headings={headings} previous={previous ? { id: previous.id, title: previous.data.title } : null} next={next ? { id: next.id, title: next.data.title } : null}>
     <Content />
   </ArticleContent>
