@@ -5,14 +5,14 @@
 - Status: Active
 - Last refreshed: 2026-08-26
 - Primary product surfaces: 中英文首页、文章详情、订阅、评论、CMS、离线页、移动导航与归档入口。
-- Evidence reviewed: 现有 Astro/Pixelium 实现、Buttondown、giscus、Cloudflare Web Analytics、Sveltia CMS 官方文档。
+- Evidence reviewed: 现有 Astro/Pixelium 实现、首页明暗主题截图、导航与工具按钮交互、Buttondown、giscus、Cloudflare Web Analytics、Sveltia CMS 配置。
 - Assumptions: 个人内容型博客；中文为主、英文为完整镜像；外部账号未配置时必须显示真实的待配置状态。
 
 ## Brand
 
 - Personality: 好奇、克制、亲近，带有 90 年代桌面系统与掌机游戏的记忆。
 - Trust signals: 清晰作者身份、真实发布日期/更新时间、稳定文章链接、可读正文、公开 RSS。
-- Avoid: 低对比霓虹、整页像素字体、过度动画、玻璃拟态、大圆角、营销式巨型口号。
+- Avoid: 低对比霓虹、低字号与紧行距导致的像素字疲劳、过度动画、玻璃拟态、大圆角、营销式巨型口号。
 
 ## Product goals
 
@@ -45,15 +45,15 @@
 - Color: 墨黑 `#171923`、纸白 `#fffaf0`、电光绿 `#5ee18f`、珊瑚红 `#ff6b6b`、天蓝 `#65b7ff`、日光黄 `#ffd166`。深浅主题保持稳定语义。
 - Typography: 所有可见内容统一使用 Pixelium 自带的 `Fusion Pixel Zh_hans`，包含品牌、导航、按钮、标题、摘要、正文、目录、元信息和代码。
 - Spacing/layout rhythm: 以 4px 为基础，主要节奏为 8/12/16/24/32/48px；内容最大宽度 1120px，正文 720px。
-- Shape/radius/elevation: 0-4px 圆角；2px 硬边框；4px 硬阴影；不使用模糊阴影。
-- Motion: 120-180ms 的整数像素位移；不循环漂浮；减少动态效果时全部停用。
-- Imagery/iconography: CSS 像素桌面场景、8-bit 缩略图、Lucide 功能图标；色块同时配文字。
+- Shape/radius/elevation: 0-4px 圆角；2-3px 硬边框；3-4px 硬阴影；头部使用分段彩色底轨建立系统边界；不使用模糊阴影。
+- Motion: 120-180ms 的整数像素位移；导航悬停上移 2px 并显示功能色底轨，按下回落 1px；不循环漂浮；减少动态效果时全部停用。
+- Imagery/iconography: `PN` 像素字标、CSS 像素桌面场景、8-bit 缩略图、像素化功能图标；功能色块同时配可访问名称。
 
 ## Components
 
 - Existing components to reuse: Pixelium `Button`、`Link`、`Tag`、`Card`、`Row`、`Col`、`Divider`、`Breadcrumb`、`Avatar`、`BackTop`。
-- New/changed components: `NewsletterForm`、`Comments`、语言切换、PWA 注册、离线页和 CMS 管理入口；沿用现有 Pixelium 控件与硬边框语言。
-- Variants and states: 默认/悬停/聚焦/按下/禁用；外部服务增加未配置、加载、成功和服务端错误状态。
+- New/changed components: `BrandMark`、`HeaderActions`、语言切换、`NewsletterForm`、`Comments`、PWA 注册、离线页和 CMS 管理入口；沿用现有 Pixelium 控件与硬边框语言。
+- Variants and states: 头部字标为绿/珊瑚红 `PN` 锁定；导航默认/悬停/当前页/聚焦/按下；语言、搜索、主题使用同尺寸不同功能色；外部服务增加未配置、加载、成功和服务端错误状态。
 - Token/component ownership: 通用组件外观和交互由 Pixelium 变量与组件管理；博客色彩、正文节奏和场景插画由 `styles.css` 的 `--blog-*` 变量管理。
 
 ## Accessibility
@@ -67,7 +67,7 @@
 ## Responsive behavior
 
 - Supported breakpoints/devices: 360px 起；移动端 `<768px`；桌面端 `>=768px`；增强布局 `>=1100px`。
-- Layout adaptations: 首页双栏变单栏；桌面文章目录固定于右侧，移动端折叠为目录按钮；导航变抽屉。
+- Layout adaptations: 首页双栏变单栏；桌面文章目录固定于右侧，移动端折叠为目录按钮；导航变抽屉；400px 以下顶部仅保留搜索和菜单，语言与主题转入菜单。
 - Touch/hover differences: 触控目标至少 44px；触摸设备不依赖 hover 显示关键信息。
 
 ## Interaction states
