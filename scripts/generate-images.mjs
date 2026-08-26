@@ -35,6 +35,7 @@ function svg({ title, subtitle, accent }, width, height) {
 
 await fs.mkdir(path.join(root, 'public/images/og'), { recursive: true })
 await fs.mkdir(path.join(root, 'public/images/posts'), { recursive: true })
+await fs.mkdir(path.join(root, 'public/images/icons'), { recursive: true })
 
 for (const asset of assets) {
   const ogBase = path.join(root, 'public/images/og', asset.id)
@@ -48,4 +49,11 @@ for (const asset of assets) {
   }
 }
 
-console.log(`Generated ${assets.length} OG images and ${assets.length - 1} article covers.`)
+const iconSvg = (size) => `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 16 16"><rect width="16" height="16" fill="#fffaf0"/><path fill="#171923" d="M1 1h14v14H1z"/><path fill="#5ee18f" d="M3 3h4v4H3zM9 9h4v4H9z"/><path fill="#ff6b6b" d="M9 3h4v4H9zM3 9h4v4H3z"/><path fill="#ffd166" d="M7 7h2v2H7z"/></svg>`
+for (const size of [192, 512]) {
+  const iconBase = path.join(root, `public/images/icons/icon-${size}`)
+  await sharp(Buffer.from(iconSvg(size))).png({ compressionLevel: 9, palette: true }).toFile(`${iconBase}.png`)
+  await sharp(`${iconBase}.png`).webp({ lossless: true }).toFile(`${iconBase}.webp`)
+}
+
+console.log(`Generated ${assets.length} OG images, ${assets.length - 1} article covers, and 2 app icons.`)

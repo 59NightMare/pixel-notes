@@ -33,5 +33,6 @@ const analyticsToken = import.meta.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN
     <slot />
     <footer id="about" class="site-footer" data-pagefind-ignore><div class="container">{!isEnglish && <NewsletterForm client:load username={buttondownUsername} compact />}<div class="footer-grid"><div><strong class="brand">PIXEL NOTES</strong><p>{isEnglish ? 'Written and maintained by A-Che in Shanghai.' : '由阿澈在上海持续写作与维护。'}</p></div><nav class="footer-links" aria-label={isEnglish ? 'Footer navigation' : '页脚导航'}><Link href={isEnglish ? '/en/archive/' : '/archive/'}>{isEnglish ? 'Archive' : '归档'}</Link><Link href="/rss.xml">RSS</Link><Link href="/privacy/">{isEnglish ? 'Privacy' : '隐私'}</Link><Link href="/admin/">CMS</Link></nav></div></div></footer>
     <BackTopControl client:load />
+    <script is:inline>if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('/service-worker.js'))</script>
   </body>
 </html>
