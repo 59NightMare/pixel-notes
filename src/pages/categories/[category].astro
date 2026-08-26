@@ -2,12 +2,15 @@
 import { getCollection } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import ListingContent from '../../components/ListingContent.vue'
-import { serializePost, sortPosts } from '../../lib/posts'
+import { orderedCounts, serializePost, sortPosts } from '../../lib/posts'
+import { categories } from '../../config/taxonomy'
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft)
   return [...new Set(posts.map((post) => post.data.category))].map((category) => ({ params: { category }, props: { category } }))
 }
 const { category } = Astro.props
-const posts = sortPosts(await getCollection('posts', ({ data }) => !data.draft && data.category === category)).map(serializePost)
+const entries = sortPosts(await getCollection('posts', ({ data }) => !data.draft))
+const posts = entries.filter((post) => post.data.category === category).map(serializePost)
+const filters = orderedCounts(entries.map((post) => post.data.category), categories).map((item) => ({ ...item, href: `/categories/${encodeURIComponent(item.label)}/` }))
 ---
-<BaseLayout title={`${category} - Pixel Notes`} description={`浏览“${category}”分类中的文章。`}><ListingContent client:load eyebrow="CATEGORY" title={category} description={`该分类共有 ${posts.length} 篇文章。`} posts={posts} /></BaseLayout>
+<BaseLayout title={`${category} - Pixel Notes`} description={`浏览“${category}”分类中的文章。`}><ListingContent client:load eyebrow="CATEGORY" title={category} description={`该分类共有 ${posts.length} 篇文章。`} posts={posts} filters={filters} filterType="category" activeFilter={category} totalCount={entries.length} /></BaseLayout>

@@ -2,10 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import HomeContent from '../components/HomeContent.vue'
 import { getCollection } from 'astro:content'
-import { counts, serializePost, sortPosts } from '../lib/posts'
+import { orderedCounts, serializePost, sortPosts } from '../lib/posts'
+import { categories } from '../config/taxonomy'
 const entries = sortPosts(await getCollection('posts', ({ data }) => !data.draft))
 const posts = entries.map(serializePost)
 const featured = entries.filter((post) => post.data.featured).map(serializePost)
-const topics = counts(entries.map((post) => post.data.category)).map((item) => ({ ...item, href: `/categories/${encodeURIComponent(item.label)}/` }))
+const topics = orderedCounts(entries.map((post) => post.data.category), categories).map((item) => ({ ...item, href: `/categories/${encodeURIComponent(item.label)}/` }))
 ---
 <BaseLayout title="Pixel Notes - 设计、代码与独立创作" description="Pixel Notes，记录设计、代码与独立创作的像素风个人博客。" alternatePath="/en/"><HomeContent client:load featured={featured} posts={posts} topics={topics} /></BaseLayout>

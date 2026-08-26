@@ -43,6 +43,11 @@ export function serializePost(post: PostEntry) {
   }
 }
 
-export function counts(values: string[]) {
-  return [...new Set(values)].map((label) => ({ label, count: values.filter((value) => value === label).length }))
+export function orderedCounts(values: string[], order: readonly string[]) {
+  const totals = new Map<string, number>()
+  values.forEach((value) => totals.set(value, (totals.get(value) ?? 0) + 1))
+  return order.flatMap((label) => {
+    const count = totals.get(label)
+    return count ? [{ label, count }] : []
+  })
 }
