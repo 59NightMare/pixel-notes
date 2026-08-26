@@ -54,7 +54,7 @@
 
 - Existing components to reuse: Pixelium `Button`、`Link`、`Tag`、`Card`、`Row`、`Col`、`Divider`、`Breadcrumb`、`Avatar`、`BackTop`。
 - New/changed components: `BrandMark`、`HeaderActions`、语言切换、`NewsletterForm`、`Comments`、PWA 注册、离线页和 CMS 管理入口；沿用现有 Pixelium 控件与硬边框语言。
-- Variants and states: 头部使用像素笔记页 Logo 与 `PIXEL / NOTES`锁定；导航默认/无底色悬停/黄色当前页/聚焦/按下；语言、搜索、主题保持独立方形工具按钮，默认使用与头部同源的低饱和功能色填充，并分别使用珊瑚红、天蓝、紫色硬阴影和悬停位移；外部服务增加未配置、加载、成功和服务端错误状态。
+- Variants and states: 头部使用像素笔记页 Logo 与 `PIXEL / NOTES`锁定；Logo 图形与右侧工具按钮共用“低饱和底色 + 功能色硬阴影 + 悬停位移”语法，品牌文字保持扁平；导航默认/无底色悬停/黄色当前页/聚焦/按下；语言、搜索、主题保持独立方形工具按钮，默认使用与头部同源的低饱和功能色填充，并分别使用珊瑚红、天蓝、紫色硬阴影和悬停位移；外部服务增加未配置、加载、成功和服务端错误状态。
 - Token/component ownership: 通用组件外观和交互由 Pixelium 变量与组件管理；博客色彩、正文节奏和场景插画由 `styles.css` 的 `--blog-*` 变量管理。
 
 ## Accessibility
