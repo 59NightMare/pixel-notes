@@ -1,12 +1,6 @@
----
-const pixels = [
-  'p', 'p', 'p', '', 'n', '', '', 'n',
-  'p', '', 'p', '', 'n', 'n', '', 'n',
-  'p', 'p', 'p', '', 'n', '', 'n', 'n',
-  'p', '', '', '', 'n', '', '', 'n',
-  'p', '', '', '', 'n', '', '', 'n',
-]
----
 <span class="brand-mark" aria-hidden="true">
-  {pixels.map((pixel) => <i class={pixel ? `is-${pixel}` : undefined}></i>)}
+  <i class="mark-fold"></i>
+  <i class="mark-line mark-line-one"></i>
+  <i class="mark-line mark-line-two"></i>
+  <i class="mark-cursor"></i>
 </span>

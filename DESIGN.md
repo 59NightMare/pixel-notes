@@ -5,7 +5,7 @@
 - Status: Active
 - Last refreshed: 2026-08-26
 - Primary product surfaces: 中英文首页、文章详情、订阅、评论、CMS、离线页、移动导航与归档入口。
-- Evidence reviewed: 现有 Astro/Pixelium 实现、首页明暗主题截图、导航与工具按钮交互、Buttondown、giscus、Cloudflare Web Analytics、Sveltia CMS 配置。
+- Evidence reviewed: 现有 Astro/Pixelium 实现、首页明暗主题截图、头部与 Hero 视觉竞争审计、导航与工具按钮交互、Buttondown、giscus、Cloudflare Web Analytics、Sveltia CMS 配置。
 - Assumptions: 个人内容型博客；中文为主、英文为完整镜像；外部账号未配置时必须显示真实的待配置状态。
 
 ## Brand
@@ -37,6 +37,7 @@
 - 像素语言贯穿全部内容：标题、正文、导航、目录与代码统一使用 Fusion Pixel，并通过字号、行距和内容宽度保持可读性。
 - 像桌面工具一样清晰：边界、状态与层级直接可见，避免装饰性容器堆叠。
 - 内容先于气氛：首屏立即出现真实文章与主题，视觉场景只负责建立品牌记忆。
+- 头部服务内容：头部只承担身份、导航与工具，不与 Hero 争夺色彩和视觉重心。
 - 小而有反馈：按钮按压、复制成功与主题切换有短促反馈，并支持减少动态效果。
 - Tradeoffs: 牺牲部分“纯复古”真实性，换取现代可访问性、移动体验与搜索可发现性。
 
@@ -45,15 +46,15 @@
 - Color: 墨黑 `#171923`、纸白 `#fffaf0`、电光绿 `#5ee18f`、珊瑚红 `#ff6b6b`、天蓝 `#65b7ff`、日光黄 `#ffd166`。深浅主题保持稳定语义。
 - Typography: 所有可见内容统一使用 Pixelium 自带的 `Fusion Pixel Zh_hans`，包含品牌、导航、按钮、标题、摘要、正文、目录、元信息和代码。
 - Spacing/layout rhythm: 以 4px 为基础，主要节奏为 8/12/16/24/32/48px；内容最大宽度 1120px，正文 720px。
-- Shape/radius/elevation: 0-4px 圆角；2-3px 硬边框；3-4px 硬阴影；头部使用分段彩色底轨建立系统边界；不使用模糊阴影。
-- Motion: 120-180ms 的整数像素位移；导航悬停上移 2px 并显示功能色底轨，按下回落 1px；不循环漂浮；减少动态效果时全部停用。
-- Imagery/iconography: `PN` 像素字标、CSS 像素桌面场景、8-bit 缩略图、像素化功能图标；功能色块同时配可访问名称。
+- Shape/radius/elevation: 0-4px 圆角；2-3px 硬边框；内容卡片可使用 3-4px 硬阴影；头部仅使用单色边界且工具组不使用外阴影；不使用模糊阴影。
+- Motion: 120-180ms 的整数像素反馈；头部导航仅更换底线与背景，搜索和主题图标可进行轻微缩放/旋转；不循环漂浮；减少动态效果时全部停用。
+- Imagery/iconography: 像素笔记页 Logo、CSS 像素桌面场景、8-bit 缩略图、像素化功能图标；功能色仅在具体控件交互时出现。
 
 ## Components
 
 - Existing components to reuse: Pixelium `Button`、`Link`、`Tag`、`Card`、`Row`、`Col`、`Divider`、`Breadcrumb`、`Avatar`、`BackTop`。
 - New/changed components: `BrandMark`、`HeaderActions`、语言切换、`NewsletterForm`、`Comments`、PWA 注册、离线页和 CMS 管理入口；沿用现有 Pixelium 控件与硬边框语言。
-- Variants and states: 头部字标为绿/珊瑚红 `PN` 锁定；导航默认/悬停/当前页/聚焦/按下；语言、搜索、主题使用同尺寸不同功能色；外部服务增加未配置、加载、成功和服务端错误状态。
+- Variants and states: 头部使用像素笔记页 Logo 与 `PIXEL / NOTES`锁定；导航默认/悬停/当前页/聚焦/按下；语言、搜索、主题合并为连续工具组，只在悬停时出现功能色；外部服务增加未配置、加载、成功和服务端错误状态。
 - Token/component ownership: 通用组件外观和交互由 Pixelium 变量与组件管理；博客色彩、正文节奏和场景插画由 `styles.css` 的 `--blog-*` 变量管理。
 
 ## Accessibility
