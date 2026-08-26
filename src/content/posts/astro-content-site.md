@@ -3,9 +3,11 @@ title: "用 Astro 搭一个真正轻量的内容站"
 summary: "把文章留在 Markdown，把交互交给小型岛屿，让内容站在没有复杂后端的情况下保持快速。"
 publishedAt: 2026-08-18
 category: "技术笔记"
-tags: ["Astro", "静态站点", "性能"]
+tags: ["Astro", "前端开发", "个人网站"]
 featured: true
 readingTime: 6
+cover: "/images/posts/astro-content-site.png"
+ogImage: "/images/og/astro-content-site.png"
 coverAlt: "像素窗口中显示静态构建流程"
 ---
 

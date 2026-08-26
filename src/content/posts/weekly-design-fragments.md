@@ -3,8 +3,10 @@ title: "我如何整理一周的设计碎片"
 summary: "从随手记录到真正能复用的个人知识库：用主题、出处和下一步，把碎片变成长期材料。"
 publishedAt: 2026-07-10
 category: "设计观察"
-tags: ["知识管理", "设计方法"]
+tags: ["知识管理", "写作", "界面设计"]
 readingTime: 7
+cover: "/images/posts/weekly-design-fragments.png"
+ogImage: "/images/og/weekly-design-fragments.png"
 coverAlt: "像素便签排列在网格工作台上"
 ---
 

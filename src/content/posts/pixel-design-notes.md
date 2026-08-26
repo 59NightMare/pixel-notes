@@ -4,9 +4,11 @@ summary: "像素感不等于低清晰度。有限色板、整数网格与明确�
 publishedAt: 2026-08-26
 updatedAt: 2026-08-26
 category: "设计观察"
-tags: ["像素设计", "界面", "可访问性"]
+tags: ["像素设计", "界面设计", "前端开发"]
 featured: true
 readingTime: 8
+cover: "/images/posts/pixel-design-notes.png"
+ogImage: "/images/og/pixel-design-notes.png"
 coverAlt: "几何化的像素工作台与显示器"
 ---
 

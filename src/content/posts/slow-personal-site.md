@@ -5,6 +5,8 @@ publishedAt: 2026-07-22
 category: "随笔"
 tags: ["个人网站", "写作"]
 readingTime: 5
+cover: "/images/posts/slow-personal-site.png"
+ogImage: "/images/og/slow-personal-site.png"
 coverAlt: "像素时钟与一叠写作卡片"
 ---
 

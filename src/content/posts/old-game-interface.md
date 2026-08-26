@@ -3,9 +3,11 @@ title: "为什么老游戏的界面依然值得学习"
 summary: "有限分辨率迫使设计师明确层级、状态与操作反馈，这些原则并没有随着屏幕变大而过时。"
 publishedAt: 2026-08-03
 category: "游戏与像素"
-tags: ["游戏界面", "像素", "交互"]
+tags: ["游戏设计", "像素设计", "界面设计"]
 featured: true
 readingTime: 9
+cover: "/images/posts/old-game-interface.png"
+ogImage: "/images/og/old-game-interface.png"
 coverAlt: "旧掌机中的像素菜单"
 ---
 
