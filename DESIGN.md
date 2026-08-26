@@ -4,9 +4,9 @@
 
 - Status: Active
 - Last refreshed: 2026-08-26
-- Primary product surfaces: 首页、文章详情页、移动导航、归档/分类入口
-- Evidence reviewed: `../pixel-blog-requirements.md`、Pixelium Design 官方快速开始/主题/暗色模式文档、`@pixelium/web-vue@0.2.0-beta` 类型定义。
-- Assumptions: 个人内容型博客；主要内容为技术、设计、游戏与随笔；中文优先；首版不开放评论。
+- Primary product surfaces: 中英文首页、文章详情、订阅、评论、CMS、离线页、移动导航与归档入口。
+- Evidence reviewed: 现有 Astro/Pixelium 实现、Buttondown、giscus、Cloudflare Web Analytics、Sveltia CMS 官方文档。
+- Assumptions: 个人内容型博客；中文为主、英文为完整镜像；外部账号未配置时必须显示真实的待配置状态。
 
 ## Brand
 
@@ -17,8 +17,8 @@
 ## Product goals
 
 - Goals: 让读者快速判断博客主题；轻松发现文章；获得舒适、专注的长文阅读体验。
-- Non-goals: 首版不建设社区、会员、即时聊天、在线协作编辑器。
-- Success signals: 文章进入率、阅读完成率、归档/分类使用率、RSS 订阅量、回访率。
+- Non-goals: 不自建邮箱、评论身份、访问分析或 OAuth 数据库；不建设会员、即时聊天和实时协作编辑器。
+- Success signals: 文章进入率、阅读完成率、订阅确认率、评论质量、中英文切换率、离线回访率。
 
 ## Personas and jobs
 
@@ -28,8 +28,8 @@
 
 ## Information architecture
 
-- Primary navigation: 首页、归档、分类、标签、关于；右侧为搜索与主题切换。
-- Core routes/screens: `/`、`/posts/[slug]`、`/archive`、`/categories/[slug]`、`/tags/[slug]`、`/about`、`/404`。
+- Primary navigation: 中文为首页、归档、分类、标签、关于；英文为 Home、Archive、About；右侧为语言、搜索与主题切换。
+- Core routes/screens: `/`、`/posts/[slug]`、`/en/`、`/en/posts/[slug]`、`/archive`、`/privacy`、`/offline`、`/admin`、`/404`。
 - Content hierarchy: 品牌与导航 -> 精选/最新内容 -> 主题入口 -> 作者信息；文章页以标题和正文优先。
 
 ## Design principles
@@ -52,15 +52,15 @@
 ## Components
 
 - Existing components to reuse: Pixelium `Button`、`Link`、`Tag`、`Card`、`Row`、`Col`、`Divider`、`Breadcrumb`、`Avatar`、`BackTop`。
-- New/changed components: 顶部博客导航、像素品牌场景、文章行、精选文章布局、文章目录、代码块与移动抽屉；通用控件不得重复实现 Pixelium 已有能力。
-- Variants and states: 默认/悬停/聚焦/按下/禁用；文章项支持精选状态；目录支持当前章节状态。
+- New/changed components: `NewsletterForm`、`Comments`、语言切换、PWA 注册、离线页和 CMS 管理入口；沿用现有 Pixelium 控件与硬边框语言。
+- Variants and states: 默认/悬停/聚焦/按下/禁用；外部服务增加未配置、加载、成功和服务端错误状态。
 - Token/component ownership: 通用组件外观和交互由 Pixelium 变量与组件管理；博客色彩、正文节奏和场景插画由 `styles.css` 的 `--blog-*` 变量管理。
 
 ## Accessibility
 
 - Target standard: WCAG 2.1 AA。
 - Keyboard/focus behavior: 保留自然 Tab 顺序；所有操作控件具有高对比 3px 焦点框；移动菜单可键盘关闭。
-- Contrast/readability: 正文对比度至少 4.5:1，正文不使用像素字体，行宽约 68 个中文字符以内。
+- Contrast/readability: 正文对比度至少 4.5:1；遵循全站 Fusion Pixel 视觉要求，通过字号、行高和约 68 个中文字符的行宽维持可读性。
 - Screen-reader semantics: 语义化导航、主内容、文章、标题层级；图标按钮均有可访问名称。
 - Reduced motion and sensory considerations: 遵循 `prefers-reduced-motion`；颜色不作为唯一状态信号。
 
@@ -77,7 +77,7 @@
 - Error: 用高对比红色边框与明确恢复操作，不只显示错误代码。
 - Success: 复制、主题切换使用 2 秒以内的文本反馈。
 - Disabled: 降低对比并移除硬阴影，同时保留文字标签。
-- Offline/slow network: 核心 HTML 与正文静态生成；图像懒加载，不阻塞阅读。
+- Offline/slow network: 核心壳层预缓存；文章访问后缓存，最多 30 个页面；后台和第三方评论不缓存；离线时提供明确恢复入口。
 
 ## Content voice
 
@@ -90,12 +90,13 @@
 - Framework/styling system: Astro 7 + TypeScript + Vue islands + `@pixelium/web-vue@0.2.0-beta`；内容为 Markdown/MDX。
 - Design-token constraints: Pixelium 版本精确锁定；优先按需导入；通用控件直接使用组件库，博客业务层只扩展排版和品牌变量。
 - Performance constraints: 静态 HTML 优先；首屏 JS 小于 40KB gzip；LCP 目标 <=2.5s；CLS <=0.1。
-- Compatibility constraints: 当前及前一版本 Chrome、Edge、Firefox、Safari；当前 iOS Safari 与 Android Chrome。
+- Compatibility constraints: 当前及前一版本 Chrome、Edge、Firefox、Safari；当前 iOS Safari 与 Android Chrome；service worker 仅在支持时渐进增强。
 - Test/screenshot expectations: 1440x900、768x1024、390x844 三组截图；键盘导航、主题、抽屉与正文溢出检查。
 
 ## Open questions
 
 - [ ] 正式站名与作者名 / 站长 / 影响品牌文案与域名
 - [ ] 是否已有旧文章与 URL / 站长 / 影响迁移与重定向
-- [ ] 最终部署选 Cloudflare Pages 还是 Vercel / 技术负责人 / 影响域名与分析配置
-- [ ] 是否需要中英双语 / 站长 / 影响路由、搜索索引与内容模型
+- [ ] 正式域名与 Cloudflare Pages 项目 / 站长 / 影响 `SITE_URL`、giscus 来源与分析
+- [ ] Buttondown 用户名 / 站长 / 启用真实邮件订阅
+- [ ] GitHub 仓库与 giscus ID / 站长 / 启用 CMS 登录、评论与审核

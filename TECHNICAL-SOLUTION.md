@@ -11,9 +11,12 @@
 | 搜索 | Pagefind 构建时索引 | 静态部署、中文可检索、无需第三方服务 |
 | 图片 | Sharp 构建脚本 + 素材登记表 | 像素图使用无损 PNG/WebP，固定尺寸并在构建前校验版权信息 |
 | 部署 | Cloudflare Pages 为默认，Vercel 为备选 | 自动预览、全球 CDN、HTTPS 和低成本 |
-| 分析 | Cloudflare Web Analytics | 无 Cookie、部署简单、隐私负担低 |
-| 评论 | 首版关闭 | 避免审核、垃圾信息和隐私复杂度 |
-| 订阅 | 首版 RSS，邮件订阅为 P1 | RSS 无第三方依赖，适合内容站首发 |
+| 分析 | Cloudflare Web Analytics | Cloudflare 自动注入优先，无跨站跟踪 Cookie；手动 beacon 仅作备选 |
+| 评论 | giscus + GitHub Discussions | GitHub 身份、举报与审核，不在本站保存账号数据 |
+| 订阅 | Buttondown 原生表单 + RSS | 双重确认与退订由服务商处理，无本站邮件数据库 |
+| 多语言 | 独立 `posts` / `postsEn` 内容集合 | 中英文章一一对应，可独立校订并生成 `hreflang` |
+| CMS | Sveltia CMS + GitHub editorial workflow | 可视化编辑生成分支/PR，Markdown 仍是内容源 |
+| PWA | Web Manifest + 原生 Service Worker | 核心壳层预缓存，访问后的文章可离线阅读 |
 
 ## 2. 内容工作流
 
@@ -126,7 +129,13 @@ astro.config.mjs
 
 ## 7. P1 演进
 
-- 邮件订阅：选用支持双重确认和一键退订的服务。
-- 评论：优先 GitHub 身份托管方案，开启审核与反垃圾策略。
 - 内容规模超过约 1000 篇或需要复杂中文分词时，再评估托管搜索服务。
-- 需要非技术人员频繁发稿时，在 Git 内容仓库上增加轻量 CMS，不改变文章文件所有权。
+- 多编辑者 CMS：部署 Sveltia CMS Authenticator 到 Cloudflare Workers，OAuth secret 仅存 Worker secret。
+
+## 8. 外部服务上线清单
+
+1. Buttondown：设置 `PUBLIC_BUTTONDOWN_USERNAME`；表单使用原生 POST 和 `embed=1`，不要改为 `fetch`。
+2. giscus：公开 GitHub 仓库、开启 Discussions、安装 giscus App，从 giscus.app 获取四个 ID；将 `giscus.json` 的正式来源换成真实域名。
+3. Cloudflare Web Analytics：优先在 Dashboard 为正式 hostname 开启自动注入；启用后保持 `PUBLIC_CF_WEB_ANALYTICS_TOKEN` 为空，避免重复 beacon。
+4. Sveltia CMS：将 `public/admin/config.yml` 的 `owner/pixel-notes` 换成真实仓库。单人可在登录页使用细粒度 PAT；多人使用 Cloudflare Worker OAuth，不把 token 或 secret 写入仓库。
+5. PWA：每次调整缓存策略时更新 `VERSION`；CMS、外部评论和跨域请求不得进入缓存。
