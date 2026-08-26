@@ -40,6 +40,7 @@
 - 头部服务内容：头部只承担身份、导航与工具，不与 Hero 争夺色彩和视觉重心。
 - 页脚收束而不重复首屏：邮件订阅是轻量操作层，品牌与导航是稳定收尾层，避免在深色区域继续堆叠卡片。
 - 内容入口保持同一种交互语法：Hero 主次操作、首页主题索引与分类/标签筛选均使用单一链接控件，统一硬边框、功能色阴影、按压位移和当前状态，禁止链接嵌套按钮。
+- 文章卡片按阅读任务分级：精选卡负责建立视觉记忆，保留大图但让标题和阅读入口可见；归档、分类和标签使用紧凑横向卡，优先展示标题、摘要和元信息，避免封面占据整个首屏。
 - 小而有反馈：按钮按压、复制成功与主题切换有短促反馈，并支持减少动态效果。
 - Tradeoffs: 牺牲部分“纯复古”真实性，换取现代可访问性、移动体验与搜索可发现性。
 
@@ -55,7 +56,7 @@
 ## Components
 
 - Existing components to reuse: Pixelium `Button`、`Link`、`Tag`、`Card`、`Row`、`Col`、`Divider`、`Breadcrumb`、`Avatar`、`BackTop`。
-- New/changed components: `BrandMark`、`HeaderActions`、语言切换、`NewsletterForm`、页脚品牌导航、Hero 操作链接、主题索引、分类/标签内容地图、`Comments`、PWA 注册、离线页和 CMS 管理入口；沿用现有 Pixelium 控件与硬边框语言。
+- New/changed components: `BrandMark`、`HeaderActions`、语言切换、`NewsletterForm`、页脚品牌导航、Hero 操作链接、主题索引、分类/标签内容地图、精选文章卡、紧凑文章卡、`Comments`、PWA 注册、离线页和 CMS 管理入口；沿用现有 Pixelium 控件与硬边框语言。
 - Variants and states: 头部与页脚共用像素笔记页 Logo 与 `PIXEL / NOTES` 锁定；页脚保持单一绿色边界、无嵌套卡片，订阅不可用时以 RSS 正向入口替代开发态警告；Hero 操作使用主/次链接，侧栏使用紧凑索引行，分类与标签使用带编号和计数的选择链接，黄色表示当前项；Logo 图形与右侧工具按钮共用“低饱和底色 + 功能色硬阴影 + 悬停位移”语法，品牌文字保持扁平；导航默认/无底色悬停/黄色当前页/聚焦/按下；语言、搜索、主题保持独立方形工具按钮，默认使用与头部同源的低饱和功能色填充，并分别使用珊瑚红、天蓝、紫色硬阴影和悬停位移；外部服务增加未配置、加载、成功和服务端错误状态。
 - Token/component ownership: 通用组件外观和交互由 Pixelium 变量与组件管理；博客色彩、正文节奏和场景插画由 `styles.css` 的 `--blog-*` 变量管理。
 
@@ -70,7 +71,7 @@
 ## Responsive behavior
 
 - Supported breakpoints/devices: 360px 起；移动端 `<768px`；桌面端 `>=768px`；增强布局 `>=1100px`。
-- Layout adaptations: 首页双栏变单栏；桌面文章目录固定于右侧，移动端折叠为目录按钮；导航变抽屉；400px 以下顶部仅保留搜索和菜单，语言与主题转入菜单。
+- Layout adaptations: 首页双栏变单栏；普通文章卡在桌面端使用横向媒体与内容布局，移动端折叠为上下结构；桌面文章目录固定于右侧，移动端折叠为目录按钮；导航变抽屉；400px 以下顶部仅保留搜索和菜单，语言与主题转入菜单。
 - Touch/hover differences: 触控目标至少 44px；触摸设备不依赖 hover 显示关键信息。
 
 ## Interaction states
