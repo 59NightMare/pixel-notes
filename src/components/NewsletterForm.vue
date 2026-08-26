@@ -9,7 +9,7 @@ const action = props.username ? `https://buttondown.com/api/emails/embed-subscri
 
 <template>
   <section class="newsletter" :class="{ compact }" aria-labelledby="newsletter-title">
-    <div>
+    <div class="newsletter-copy">
       <span class="pixel-label">MAIL LOG</span>
       <h2 id="newsletter-title">订阅新文章</h2>
       <p>只发送新文章与重要修订。双重确认，可随时退订。</p>
@@ -20,6 +20,9 @@ const action = props.username ? `https://buttondown.com/api/emails/embed-subscri
       <input type="hidden" name="embed" value="1" />
       <Button type="submit" theme="sakura">订阅</Button>
     </form>
-    <p v-else class="service-note">邮件通道待配置，当前可使用 <a href="/rss.xml">RSS 订阅</a>。</p>
+    <p v-else class="service-note">
+      <span>邮件订阅暂未开放</span>
+      <a class="newsletter-rss" href="/rss.xml">通过 RSS 关注 <span aria-hidden="true">→</span></a>
+    </p>
   </section>
 </template>

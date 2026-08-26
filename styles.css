@@ -45,3 +45,37 @@ html.dark{--header-bg:#171923;--header-ink:#f7f1e3;--header-muted:#a7abba;--head
 @media(max-width:720px){.nav-shell{min-height:60px;padding-block:6px}.brand-mark{width:38px;height:38px}.brand-mark:before{height:28px}.brand-mark .mark-line-one{top:17px}.brand-mark .mark-line-two{top:24px}.brand-wordmark small{display:none}.language-switch,.nav-action{min-width:40px!important;width:40px;height:40px}.mobile-panel{inset:60px 0 auto;padding-inline:16px}}
 @media(max-width:400px){.brand>.brand-wordmark{display:grid!important}.brand-wordmark strong{font-size:13px}.language-switch,.theme-action{display:none!important}.mobile-panel{grid-template-columns:1fr}.mobile-only-setting{display:flex!important}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+
+/* Footer: a compact subscription action followed by a stable brand close. */
+.newsletter.compact{margin:0;padding:28px 0;border:0;border-bottom:2px solid #4d5262;background:transparent;color:#f7f1e3;box-shadow:none}
+.newsletter.compact .pixel-label{color:var(--blog-green)}
+.newsletter.compact h2{margin:4px 0 3px;font-size:22px}
+.newsletter.compact .newsletter-copy p{color:#b8b4aa;font-size:13px}
+.newsletter.compact form{width:100%;max-width:430px;justify-self:end}
+.newsletter.compact .service-note{min-height:48px;padding:0;display:flex;align-items:center;justify-content:flex-end;gap:16px;border:0;background:transparent;color:#b8b4aa;font-size:12px}
+.newsletter-rss{min-height:40px;padding:7px 12px;display:inline-flex;align-items:center;gap:8px;border:2px solid #f7f1e3;background:#232735;color:#f7f1e3;text-decoration:none;font-weight:700;box-shadow:3px 3px 0 var(--blog-green);transition:transform 120ms steps(2,end),box-shadow 120ms steps(2,end),background-color 120ms steps(2,end)}
+.newsletter-rss:hover,.newsletter-rss:focus-visible{background:#303647;box-shadow:5px 5px 0 var(--blog-green);transform:translate(-2px,-2px)}
+.newsletter-rss:active{box-shadow:1px 1px 0 var(--blog-green);transform:translate(1px,1px)}
+.site-footer{--footer-bg:#171923;--footer-ink:#f7f1e3;--footer-muted:#b8b4aa;margin-top:auto;padding:0 0 30px;border-top:3px solid var(--blog-green);background:var(--footer-bg);color:var(--footer-ink)}
+.footer-grid{padding-top:28px;display:flex;align-items:flex-end;justify-content:space-between;gap:32px}
+.footer-identity p{margin:9px 0 0;color:var(--footer-muted);font-size:12px}
+.footer-brand{--header-ink:var(--footer-ink);--header-bg:var(--footer-bg);display:inline-flex;align-items:center;gap:10px;color:var(--footer-ink);text-decoration:none}
+.footer-brand .brand-mark{width:36px;height:36px;border-color:var(--footer-ink);background:#232735;box-shadow:3px 3px 0 var(--blog-green)}
+.footer-brand:hover .brand-mark,.footer-brand:focus-visible .brand-mark{background:#2b3140;box-shadow:5px 5px 0 var(--blog-green);transform:translate(-2px,-2px)}
+.footer-wordmark{display:grid;gap:3px;line-height:1}
+.footer-wordmark strong{display:flex;align-items:center;gap:4px;font-size:14px}
+.footer-wordmark strong i{color:var(--blog-coral);font-style:normal}
+.footer-wordmark small{color:var(--footer-muted);font-size:9px;font-weight:700}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px}
+.footer-links a{min-height:38px;padding:6px 9px;display:inline-flex;align-items:center;border:2px solid transparent;color:var(--footer-muted);text-decoration:none;font-size:12px;font-weight:700}
+.footer-links a:hover,.footer-links a:focus-visible{border-color:#5f6576;background:#232735;color:var(--footer-ink);transform:translateY(-1px)}
+.footer-links .footer-admin{color:#8f938f}
+
+@media(max-width:720px){
+  .site-footer{padding-bottom:24px}
+  .newsletter.compact{padding:24px 0;gap:18px}
+  .newsletter.compact .service-note{align-items:flex-start;justify-content:flex-start;flex-direction:column;gap:12px}
+  .newsletter-rss{width:100%;justify-content:space-between}
+  .footer-grid{padding-top:24px;align-items:flex-start;gap:20px}
+  .footer-links{width:100%;justify-content:flex-start}
+}
