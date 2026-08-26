@@ -47,14 +47,14 @@
 - Typography: 所有可见内容统一使用 Pixelium 自带的 `Fusion Pixel Zh_hans`，包含品牌、导航、按钮、标题、摘要、正文、目录、元信息和代码。
 - Spacing/layout rhythm: 以 4px 为基础，主要节奏为 8/12/16/24/32/48px；内容最大宽度 1120px，正文 720px。
 - Shape/radius/elevation: 0-4px 圆角；2-3px 硬边框；内容卡片与头部工具按钮可使用 3-4px 硬阴影；头部页面边界仅使用单色线；不使用模糊阴影或多色底轨。
-- Motion: 120-180ms 的整数像素反馈；头部导航仅更换底线与背景，搜索和主题图标可进行轻微缩放/旋转；不循环漂浮；减少动态效果时全部停用。
+- Motion: 120-180ms 的整数像素反馈；普通导航悬停仅上移 1px 并显示黄色短底线，不铺大面积背景；工具按钮悬停提高对应功能色浓度并加深硬阴影；搜索和主题图标可进行轻微缩放/旋转；不循环漂浮；减少动态效果时全部停用。
 - Imagery/iconography: 像素笔记页 Logo、CSS 像素桌面场景、8-bit 缩略图、像素化功能图标；功能色仅在具体控件交互时出现。
 
 ## Components
 
 - Existing components to reuse: Pixelium `Button`、`Link`、`Tag`、`Card`、`Row`、`Col`、`Divider`、`Breadcrumb`、`Avatar`、`BackTop`。
 - New/changed components: `BrandMark`、`HeaderActions`、语言切换、`NewsletterForm`、`Comments`、PWA 注册、离线页和 CMS 管理入口；沿用现有 Pixelium 控件与硬边框语言。
-- Variants and states: 头部使用像素笔记页 Logo 与 `PIXEL / NOTES`锁定；导航默认/悬停/黄色当前页/聚焦/按下；语言、搜索、主题保持独立方形工具按钮，分别使用珊瑚红、天蓝、紫色硬阴影和悬停位移；外部服务增加未配置、加载、成功和服务端错误状态。
+- Variants and states: 头部使用像素笔记页 Logo 与 `PIXEL / NOTES`锁定；导航默认/无底色悬停/黄色当前页/聚焦/按下；语言、搜索、主题保持独立方形工具按钮，默认使用与头部同源的低饱和功能色填充，并分别使用珊瑚红、天蓝、紫色硬阴影和悬停位移；外部服务增加未配置、加载、成功和服务端错误状态。
 - Token/component ownership: 通用组件外观和交互由 Pixelium 变量与组件管理；博客色彩、正文节奏和场景插画由 `styles.css` 的 `--blog-*` 变量管理。
 
 ## Accessibility
