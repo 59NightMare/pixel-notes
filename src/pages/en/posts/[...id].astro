@@ -1,0 +1,19 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { getCollection, render } from 'astro:content'
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import { serializeEnglishPost, sortEnglishPosts } from '../../../lib/posts'
+
+export async function getStaticPaths() {
+  const posts = sortEnglishPosts(await getCollection('postsEn', ({ data }) => !data.draft))
+  return posts.map((post, index) => ({ params: { id: post.id }, props: { post, previous: posts[index + 1] ?? null, next: posts[index - 1] ?? null } }))
+}
+
+interface Props { post: CollectionEntry<'postsEn'>; previous: CollectionEntry<'postsEn'> | null; next: CollectionEntry<'postsEn'> | null }
+const { post, previous, next } = Astro.props
+const { Content } = await render(post)
+const article = serializeEnglishPost(post)
+---
+<BaseLayout lang="en" current="article" title={`${article.title} - Pixel Notes`} description={article.summary} ogImage={article.ogImage} ogImageAlt={article.coverAlt} ogType="article" alternatePath={`/posts/${post.id}/`}>
+  <main id="main" class="article-shell en-article"><article data-pagefind-body><nav class="plain-breadcrumb"><a href="/en/">Home</a><span>/</span><a href="/en/archive/">Archive</a></nav><header class="article-header"><span class="pixel-label">{article.category}</span><h1 data-pagefind-meta="title">{article.title}</h1><p class="article-summary">{article.summary}</p><div class="meta"><span>Published {article.publishedAt}</span><span>{article.readingTime} MIN READ</span></div></header><picture><source srcset={article.cover.replace(/\.png$/, '.webp')} type="image/webp"/><img class="article-cover" src={article.cover} alt={article.coverAlt} width="960" height="540"/></picture><div class="prose"><Content /></div><nav class="article-nav" aria-label="Article navigation">{previous && <a class="service-note" href={`/en/posts/${previous.id}/`}><small>Previous</small><strong>{previous.data.title}</strong></a>}{next && <a class="service-note" href={`/en/posts/${next.id}/`}><small>Next</small><strong>{next.data.title}</strong></a>}</nav></article></main>
+</BaseLayout>

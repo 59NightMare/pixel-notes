@@ -11,5 +11,8 @@ export const tags = [
   '个人网站',
 ] as const
 
+export const enCategories = ['Development', 'Design', 'Games & Pixels', 'Essays'] as const
+export const enTags = ['Pixel Design', 'Frontend', 'Astro', 'Interface Design', 'Game Design', 'Writing', 'Knowledge', 'Personal Web'] as const
+
 export type Category = (typeof categories)[number]
 export type Tag = (typeof tags)[number]
