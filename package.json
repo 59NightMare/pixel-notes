@@ -9,6 +9,7 @@
     "assets:generate": "node scripts/generate-images.mjs",
     "assets:validate": "node scripts/validate-assets.mjs",
     "config:check": "node scripts/check-integrations.mjs",
+    "test:smoke": "npm run build && node scripts/smoke-test.mjs",
     "build": "npm run config:check && npm run assets:validate && astro check && astro build && pagefind --site dist",
     "preview": "astro preview --host 127.0.0.1"
   },
