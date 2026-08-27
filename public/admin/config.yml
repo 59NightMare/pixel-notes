@@ -4,8 +4,6 @@ backend:
   branch: master
   squash_merges: true
 
-local_backend: true
-
 publish_mode: editorial_workflow
 media_folder: public/images/posts/uploads
 public_folder: /images/posts/uploads
