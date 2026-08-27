@@ -3,15 +3,15 @@ import type { CollectionEntry } from 'astro:content'
 export type PostEntry = CollectionEntry<'posts'>
 export type EnglishPostEntry = CollectionEntry<'postsEn'>
 
-export function sortPosts(posts: PostEntry[]) {
+type PostLike = { data: { publishedAt: Date } }
+
+export function sortPosts<T extends PostLike>(posts: T[]) {
   return [...posts].sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
 }
 
-export function sortEnglishPosts(posts: EnglishPostEntry[]) {
-  return [...posts].sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
-}
+export const sortEnglishPosts = sortPosts
 
-export function serializeEnglishPost(post: EnglishPostEntry) {
+function serializePostData<T extends PostEntry | EnglishPostEntry>(post: T) {
   return {
     id: post.id,
     title: post.data.title,
@@ -27,21 +27,8 @@ export function serializeEnglishPost(post: EnglishPostEntry) {
   }
 }
 
-export function serializePost(post: PostEntry) {
-  return {
-    id: post.id,
-    title: post.data.title,
-    summary: post.data.summary,
-    category: post.data.category,
-    publishedAt: post.data.publishedAt.toISOString().slice(0, 10).replaceAll('-', '.'),
-    updatedAt: post.data.updatedAt?.toISOString().slice(0, 10).replaceAll('-', '.'),
-    readingTime: post.data.readingTime,
-    tags: post.data.tags,
-    cover: post.data.cover,
-    ogImage: post.data.ogImage,
-    coverAlt: post.data.coverAlt,
-  }
-}
+export const serializeEnglishPost = serializePostData
+export const serializePost = serializePostData
 
 export function orderedCounts(values: string[], order: readonly string[]) {
   const totals = new Map<string, number>()
