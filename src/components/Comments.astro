@@ -40,9 +40,12 @@ const isEnglish = lang === 'en'
     frame?.contentWindow?.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app')
     return Boolean(frame)
   }
-  new MutationObserver(syncPixelNotesGiscusTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+  const themeObserver = new MutationObserver(syncPixelNotesGiscusTheme)
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
   const giscusLoader = new MutationObserver(() => {
-    if (syncPixelNotesGiscusTheme()) giscusLoader.disconnect()
+    if (syncPixelNotesGiscusTheme()) {
+      giscusLoader.disconnect()
+    }
   })
   giscusLoader.observe(document.body, { childList: true, subtree: true })
   window.addEventListener('load', syncPixelNotesGiscusTheme, { once: true })
