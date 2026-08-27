@@ -1,2 +1,2 @@
-:root{--blog-ink:#171923;--blog-muted:#545868;--blog-paper:#fffaf0;--blog-surface:#fff;--blog-soft:#f3efe6;--blog-grid:rgba(55,118,171,.07);--blog-green:#5ee18f;--blog-coral:#ff6b6b;--blog-blue:#65b7ff;--blog-yellow:#ffd166;--blog-purple:#9b7ede;--content-width:1160px;--reading-width:720px}
-html.dark{--blog-ink:#f7f1e3;--blog-muted:#bbb7ad;--blog-paper:#171923;--blog-surface:#232735;--blog-soft:#292e3d;--blog-grid:rgba(101,183,255,.06)}
+:root{--blog-ink:#171923;--blog-muted:#545868;--blog-paper:#fffaf0;--blog-surface:#fff;--blog-soft:#f3efe6;--blog-grid:rgba(55,118,171,.038);--blog-green:#5ee18f;--blog-coral:#ff6b6b;--blog-blue:#65b7ff;--blog-yellow:#ffd166;--blog-purple:#9b7ede;--content-width:1160px;--reading-width:720px}
+html.dark{--blog-ink:#f7f1e3;--blog-muted:#bbb7ad;--blog-paper:#171923;--blog-surface:#232735;--blog-soft:#292e3d;--blog-grid:rgba(101,183,255,.032)}

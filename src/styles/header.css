@@ -1,6 +1,6 @@
 /* Quiet editorial header: the hero carries the site's visual expression. */
-:root{--header-bg:#fffaf0;--header-ink:#171923;--header-muted:#666a78;--header-hover:#f1eee6;--header-control:#fffaf0;--header-border:#171923}
-html.dark{--header-bg:#171923;--header-ink:#f7f1e3;--header-muted:#a7abba;--header-hover:#252a38;--header-control:#202532;--header-border:#555c6e}
+:root{--header-bg:#fffdf8;--header-ink:#171923;--header-muted:#666a78;--header-hover:#f3f0e9;--header-control:#fffdf8;--header-border:#171923}
+html.dark{--header-bg:#1d202b;--header-ink:#f7f1e3;--header-muted:#a7abba;--header-hover:#292e3d;--header-control:#242936;--header-border:#555c6e}
 .site-header{position:sticky;border-bottom:2px solid var(--header-border);background:var(--header-bg);color:var(--header-ink);box-shadow:none;transition:background-color 140ms steps(2,end),color 140ms steps(2,end)}
 .site-header:after{display:none}
 .nav-shell{min-height:64px;padding-block:7px;gap:12px}
