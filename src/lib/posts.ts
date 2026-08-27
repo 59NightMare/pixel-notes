@@ -46,7 +46,8 @@ export function serializePost(post: PostEntry) {
 export function orderedCounts(values: string[], order: readonly string[]) {
   const totals = new Map<string, number>()
   values.forEach((value) => totals.set(value, (totals.get(value) ?? 0) + 1))
-  return order.flatMap((label) => {
+  const orderedLabels = [...order.filter((label) => totals.has(label)), ...[...totals.keys()].filter((label) => !order.includes(label)).sort((a, b) => a.localeCompare(b))]
+  return orderedLabels.flatMap((label) => {
     const count = totals.get(label)
     return count ? [{ label, count }] : []
   })

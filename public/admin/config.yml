@@ -21,8 +21,8 @@ collections:
       - { label: 摘要, name: summary, widget: text }
       - { label: 发布日期, name: publishedAt, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
       - { label: 更新日期, name: updatedAt, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
-      - { label: 分类, name: category, widget: select, options: [技术笔记, 设计观察, 游戏与像素, 随笔] }
-      - { label: 标签, name: tags, widget: select, multiple: true, options: [像素设计, 前端开发, Astro, 界面设计, 游戏设计, 写作, 知识管理, 个人网站] }
+      - { label: 分类, name: category, widget: string, hint: "可输入新分类；建议沿用：技术笔记、设计观察、游戏与像素、随笔" }
+      - { label: 标签, name: tags, widget: select, multiple: true, allow_add: true, options: [像素设计, 前端开发, Astro, 界面设计, 游戏设计, 写作, 知识管理, 个人网站], hint: "最多 5 个；可输入并新增自定义标签" }
       - { label: 精选, name: featured, widget: boolean, default: false }
       - { label: 草稿, name: draft, widget: boolean, default: false }
       - { label: 阅读分钟数, name: readingTime, widget: number, value_type: int, min: 1 }
@@ -43,8 +43,8 @@ collections:
       - { label: Summary, name: summary, widget: text }
       - { label: Published, name: publishedAt, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
       - { label: Updated, name: updatedAt, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
-      - { label: Category, name: category, widget: select, options: [Development, Design, Games & Pixels, Essays] }
-      - { label: Tags, name: tags, widget: select, multiple: true, options: [Pixel Design, Frontend, Astro, Interface Design, Game Design, Writing, Knowledge, Personal Web] }
+      - { label: Category, name: category, widget: string, hint: "Enter a new category or reuse Development, Design, Games & Pixels, or Essays" }
+      - { label: Tags, name: tags, widget: select, multiple: true, allow_add: true, options: [Pixel Design, Frontend, Astro, Interface Design, Game Design, Writing, Knowledge, Personal Web], hint: "Up to 5 tags; type to add a custom tag" }
       - { label: Featured, name: featured, widget: boolean, default: false }
       - { label: Draft, name: draft, widget: boolean, default: false }
       - { label: Reading time, name: readingTime, widget: number, value_type: int, min: 1 }
