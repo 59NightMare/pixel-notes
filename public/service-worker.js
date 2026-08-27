@@ -1,4 +1,4 @@
-const VERSION = 'pixel-notes-v1'
+const VERSION = 'pixel-notes-__BUILD_VERSION__'
 const CORE_CACHE = `${VERSION}-core`
 const PAGE_CACHE = `${VERSION}-pages`
 const CORE_ASSETS = ['/', '/en/', '/offline/', '/manifest.webmanifest', '/images/icons/icon-192.png']
@@ -27,8 +27,8 @@ self.addEventListener('fetch', (event) => {
   if (request.mode === 'navigate') {
     event.respondWith(fetch(request).then(async (response) => {
       const cache = await caches.open(PAGE_CACHE)
-      cache.put(request, response.clone())
-      trimPages()
+      await cache.put(request, response.clone())
+      await trimPages()
       return response
     }).catch(async () => (await caches.match(request)) || caches.match('/offline/')))
     return
@@ -36,7 +36,7 @@ self.addEventListener('fetch', (event) => {
 
   if (['style', 'script', 'font', 'image'].includes(request.destination)) {
     event.respondWith(caches.match(request).then((cached) => cached || fetch(request).then((response) => {
-      if (response.ok) caches.open(CORE_CACHE).then((cache) => cache.put(request, response.clone()))
+      if (response.ok) event.waitUntil(caches.open(CORE_CACHE).then((cache) => cache.put(request, response.clone())))
       return response
     })))
   }
