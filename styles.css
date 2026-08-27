@@ -1,5 +1,6 @@
 @import './src/styles/tokens.css';
 @import './src/styles/base.css';
+@import './src/styles/media.css';
 @import './src/styles/legacy-layout.css';
 @import './src/styles/header.css';
 @import './src/styles/footer.css';
