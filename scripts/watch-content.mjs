@@ -13,9 +13,10 @@ function runBuild() {
   }
 
   buildRunning = true
-  console.log('[cms] Content changed. Rebuilding the site...')
+  const fullBuild = process.env.CMS_FULL_BUILD === '1'
+  console.log(fullBuild ? '[cms] Content changed. Running a full production build...' : '[cms] Content changed. Running a quick content check...')
   const command = process.platform === 'win32' ? 'npm.cmd' : 'npm'
-  const child = spawn(command, ['run', 'build'], {
+  const child = spawn(command, ['run', fullBuild ? 'build' : 'cms:check'], {
     env: { ...process.env, SITE_URL: process.env.SITE_URL ?? 'http://127.0.0.1:4323' },
     shell: process.platform === 'win32',
     stdio: 'inherit',
@@ -23,7 +24,8 @@ function runBuild() {
 
   child.on('exit', (code) => {
     buildRunning = false
-    console.log(code === 0 ? '[cms] Build complete. Refresh the browser.' : `[cms] Build failed with exit code ${code}.`)
+    const label = fullBuild ? 'Build' : 'Content check'
+    console.log(code === 0 ? `[cms] ${label} complete.` : `[cms] ${label} failed with exit code ${code}.`)
     if (buildPending) {
       buildPending = false
       runBuild()
