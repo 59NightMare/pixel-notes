@@ -13,4 +13,4 @@ const entries = sortEnglishPosts(await getCollection('postsEn', ({ data }) => !d
 const posts = entries.filter((post) => post.data.tags.includes(tag)).map(serializeEnglishPost)
 const filters = orderedCounts(entries.flatMap((post) => post.data.tags), enTags).map((item) => ({ ...item, href: `/en/tags/${encodeURIComponent(item.label)}/` }))
 ---
-<BaseLayout lang="en" title={`#${tag} - Pixel Notes`} description={`Browse articles tagged ${tag}.`}><ListingContent client:load lang="en" eyebrow="TAG" title={`#${tag}`} description={`${posts.length} articles use this tag.`} posts={posts} filters={filters} filterType="tag" activeFilter={tag} totalCount={entries.length} /></BaseLayout>
+<BaseLayout lang="en" title={`#${tag} - Pixel Notes`} description={`Browse articles tagged ${tag}.`}><ListingContent lang="en" eyebrow="TAG" title={`#${tag}`} description={`${posts.length} articles use this tag.`} posts={posts} filters={filters} filterType="tag" activeFilter={tag} totalCount={entries.length} /></BaseLayout>

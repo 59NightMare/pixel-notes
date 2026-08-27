@@ -8,4 +8,4 @@ const entries = sortPosts(await getCollection('posts', ({ data }) => !data.draft
 const posts = entries.map(serializePost)
 const filters = orderedCounts(entries.map((post) => post.data.category), categories).map((item) => ({ ...item, href: `/categories/${encodeURIComponent(item.label)}/` }))
 ---
-<BaseLayout title="文章分类 - Pixel Notes" description="按主题分类浏览 Pixel Notes。"><ListingContent client:load eyebrow="CATEGORIES" title="文章分类" description="从稳定主题进入文章，而不是依赖不断滚动的信息流。" posts={posts} filters={filters} filterType="category" totalCount={posts.length} /></BaseLayout>
+<BaseLayout title="文章分类 - Pixel Notes" description="按主题分类浏览 Pixel Notes。"><ListingContent eyebrow="CATEGORIES" title="文章分类" description="从稳定主题进入文章，而不是依赖不断滚动的信息流。" posts={posts} filters={filters} filterType="category" totalCount={posts.length} /></BaseLayout>

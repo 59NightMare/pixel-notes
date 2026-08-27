@@ -13,4 +13,4 @@ const entries = sortPosts(await getCollection('posts', ({ data }) => !data.draft
 const posts = entries.filter((post) => post.data.tags.includes(tag)).map(serializePost)
 const filters = orderedCounts(entries.flatMap((post) => post.data.tags), tags).map((item) => ({ ...item, href: `/tags/${encodeURIComponent(item.label)}/` }))
 ---
-<BaseLayout title={`#${tag} - Pixel Notes`} description={`浏览带有“${tag}”标签的文章。`}><ListingContent client:load eyebrow="TAG" title={`#${tag}`} description={`该标签共有 ${posts.length} 篇文章。`} posts={posts} filters={filters} filterType="tag" activeFilter={tag} totalCount={entries.length} /></BaseLayout>
+<BaseLayout title={`#${tag} - Pixel Notes`} description={`浏览带有“${tag}”标签的文章。`}><ListingContent eyebrow="TAG" title={`#${tag}`} description={`该标签共有 ${posts.length} 篇文章。`} posts={posts} filters={filters} filterType="tag" activeFilter={tag} totalCount={entries.length} /></BaseLayout>

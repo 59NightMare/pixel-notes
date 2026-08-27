@@ -13,4 +13,4 @@ const entries = sortEnglishPosts(await getCollection('postsEn', ({ data }) => !d
 const posts = entries.filter((post) => post.data.category === category).map(serializeEnglishPost)
 const filters = orderedCounts(entries.map((post) => post.data.category), enCategories).map((item) => ({ ...item, href: `/en/categories/${encodeURIComponent(item.label)}/` }))
 ---
-<BaseLayout lang="en" title={`${category} - Pixel Notes`} description={`Browse articles in ${category}.`}><ListingContent client:load lang="en" eyebrow="CATEGORY" title={category} description={`${posts.length} articles in this category.`} posts={posts} filters={filters} filterType="category" activeFilter={category} totalCount={entries.length} /></BaseLayout>
+<BaseLayout lang="en" title={`${category} - Pixel Notes`} description={`Browse articles in ${category}.`}><ListingContent lang="en" eyebrow="CATEGORY" title={category} description={`${posts.length} articles in this category.`} posts={posts} filters={filters} filterType="category" activeFilter={category} totalCount={entries.length} /></BaseLayout>

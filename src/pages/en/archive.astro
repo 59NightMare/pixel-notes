@@ -5,4 +5,4 @@ import { getCollection } from 'astro:content'
 import { serializeEnglishPost, sortEnglishPosts } from '../../lib/posts'
 const posts = sortEnglishPosts(await getCollection('postsEn', ({ data }) => !data.draft)).map(serializeEnglishPost)
 ---
-<BaseLayout lang="en" title="Archive - Pixel Notes" description="Browse all English Pixel Notes articles." alternatePath="/archive/"><main id="main" class="listing-shell container"><header class="listing-header"><div class="pixel-label">ARCHIVE</div><h1>Article archive</h1><p>{posts.length} articles, newest first.</p></header><div class="post-card-grid">{posts.map((post) => <PostCard client:load post={post} lang="en" />)}</div></main></BaseLayout>
+<BaseLayout lang="en" title="Archive - Pixel Notes" description="Browse all English Pixel Notes articles." alternatePath="/archive/"><main id="main" class="listing-shell container"><header class="listing-header"><div class="pixel-label">ARCHIVE</div><h1>Article archive</h1><p>{posts.length} articles, newest first.</p></header><div class="post-card-grid">{posts.map((post) => <PostCard post={post} lang="en" />)}</div></main></BaseLayout>

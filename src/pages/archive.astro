@@ -5,4 +5,4 @@ import ListingContent from '../components/ListingContent.vue'
 import { serializePost, sortPosts } from '../lib/posts'
 const posts = sortPosts(await getCollection('posts', ({ data }) => !data.draft)).map(serializePost)
 ---
-<BaseLayout title="文章归档 - Pixel Notes" description="按发布时间浏览 Pixel Notes 的全部文章。" alternatePath="/en/archive/"><ListingContent client:load eyebrow="ARCHIVE" title="文章归档" description={`目前共有 ${posts.length} 篇文章，按发布时间从新到旧排列。`} posts={posts} /></BaseLayout>
+<BaseLayout title="文章归档 - Pixel Notes" description="按发布时间浏览 Pixel Notes 的全部文章。" alternatePath="/en/archive/"><ListingContent eyebrow="ARCHIVE" title="文章归档" description={`目前共有 ${posts.length} 篇文章，按发布时间从新到旧排列。`} posts={posts} /></BaseLayout>

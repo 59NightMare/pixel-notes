@@ -8,4 +8,4 @@ const entries = sortEnglishPosts(await getCollection('postsEn', ({ data }) => !d
 const posts = entries.map(serializeEnglishPost)
 const filters = orderedCounts(entries.flatMap((post) => post.data.tags), enTags).map((item) => ({ ...item, href: `/en/tags/${encodeURIComponent(item.label)}/` }))
 ---
-<BaseLayout lang="en" title="Tags - Pixel Notes" description="Browse Pixel Notes by tag." alternatePath="/tags/"><ListingContent client:load lang="en" eyebrow="TAGS" title="Article tags" description="Tags create more specific connections between articles." posts={posts} filters={filters} filterType="tag" totalCount={posts.length} /></BaseLayout>
+<BaseLayout lang="en" title="Tags - Pixel Notes" description="Browse Pixel Notes by tag." alternatePath="/tags/"><ListingContent lang="en" eyebrow="TAGS" title="Article tags" description="Tags create more specific connections between articles." posts={posts} filters={filters} filterType="tag" totalCount={posts.length} /></BaseLayout>
