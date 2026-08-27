@@ -18,7 +18,7 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: 标题, name: title, widget: string }
-      - { label: 摘要, name: summary, widget: text }
+      - { label: 摘要, name: summary, widget: text, pattern: ['.{20,180}', '摘要需要填写 20–180 个字符'] }
       - { label: 发布日期, name: publishedAt, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
       - { label: 更新日期, name: updatedAt, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
       - { label: 分类, name: category, widget: string, hint: "可输入新分类；建议沿用：技术笔记、设计观察、游戏与像素、随笔" }
@@ -26,7 +26,7 @@ collections:
       - { label: 精选, name: featured, widget: boolean, default: false }
       - { label: 草稿, name: draft, widget: boolean, default: false }
       - { label: 阅读分钟数, name: readingTime, widget: number, value_type: int, min: 1 }
-      - { label: 封面, name: cover, widget: image }
+      - { label: 封面, name: cover, widget: image, hint: "请上传到本站媒体库，不要粘贴外部图片地址" }
       - { label: 分享图, name: ogImage, widget: image, required: false }
       - { label: 封面替代文本, name: coverAlt, widget: string }
       - { label: 正文, name: body, widget: markdown }
@@ -40,7 +40,7 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: Title, name: title, widget: string }
-      - { label: Summary, name: summary, widget: text }
+      - { label: Summary, name: summary, widget: text, pattern: ['.{20,180}', 'Summary must contain 20–180 characters'] }
       - { label: Published, name: publishedAt, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
       - { label: Updated, name: updatedAt, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
       - { label: Category, name: category, widget: string, hint: "Enter a new category or reuse Development, Design, Games & Pixels, or Essays" }
@@ -48,7 +48,7 @@ collections:
       - { label: Featured, name: featured, widget: boolean, default: false }
       - { label: Draft, name: draft, widget: boolean, default: false }
       - { label: Reading time, name: readingTime, widget: number, value_type: int, min: 1 }
-      - { label: Cover, name: cover, widget: image }
+      - { label: Cover, name: cover, widget: image, hint: "Upload to the site media library instead of pasting an external image URL" }
       - { label: Open Graph image, name: ogImage, widget: image, required: false }
       - { label: Cover alt text, name: coverAlt, widget: string }
       - { label: Body, name: body, widget: markdown }

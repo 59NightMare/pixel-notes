@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
+    "cms:watch": "node scripts/watch-content.mjs",
     "assets:generate": "node scripts/generate-images.mjs",
     "assets:validate": "node scripts/validate-assets.mjs",
     "config:check": "node scripts/check-integrations.mjs",
