@@ -19,7 +19,7 @@ const home = await readRoute('/')
 const archive = await readRoute('/archive/')
 const search = await readRoute('/search/')
 const headerActions = await readFile(join(root, 'src/components/HeaderActions.vue'), 'utf8')
-const styles = await readFile(join(root, 'styles.css'), 'utf8')
+const styles = await readFile(join(root, 'src/styles/base.css'), 'utf8')
 
 assert.match(home, /localStorage\.getItem\(['"]pixel-notes-theme['"]\)/, 'theme preference must be restored on page load')
 assert.match(headerActions, /localStorage\.setItem\(['"]pixel-notes-theme['"]/, 'theme preference must be persisted')
