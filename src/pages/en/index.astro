@@ -1,13 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import PostCard from '../../components/PostCard.vue'
+import PixelIcon from '../../components/PixelIcon.vue'
 import { getCollection } from 'astro:content'
 import { serializeEnglishPost, sortEnglishPosts } from '../../lib/posts'
 const posts = sortEnglishPosts(await getCollection('postsEn', ({ data }) => !data.draft)).map(serializeEnglishPost)
 ---
 <BaseLayout lang="en" current="home" title="Pixel Notes - Design, Code, and Independent Making" description="A pixel-style personal blog about design, code, games, and independent making." alternatePath="/">
   <main id="main">
-    <section class="container hero"><div><div class="eyebrow">PERSONAL BLOG / DESIGN + CODE + MAKING</div><h1>Notes from inside a <span>finite grid.</span></h1><p class="hero-copy">I am A-Che, a product designer and hobbyist developer. This is where I examine interfaces, technology, games, and unfinished ideas.</p><div class="hero-actions"><a class="site-action site-action-primary" href="#latest"><span>START READING</span><i aria-hidden="true">↓</i></a><a class="site-action site-action-secondary" href="/en/about/"><span>ABOUT</span><i aria-hidden="true">↗</i></a></div></div><div class="pixel-desk" role="img" aria-label="Pixel workstation with an article open on screen"><div class="window"><div class="window-bar"><i></i><i></i><i></i></div><div class="window-content"><div class="window-line"></div><div class="window-line"></div><div class="window-line"></div><div class="window-line"></div></div></div><div class="desk-base"></div></div></section>
+    <section class="container hero"><div><div class="eyebrow">PERSONAL BLOG / DESIGN + CODE + MAKING</div><h1>Notes from inside a <span>finite grid.</span></h1><p class="hero-copy">I am A-Che, a product designer and hobbyist developer. This is where I examine interfaces, technology, games, and unfinished ideas.</p><div class="hero-actions"><a class="site-action site-action-primary" href="#latest"><span>START READING</span><PixelIcon name="arrow-down" size={18} /></a><a class="site-action site-action-secondary" href="/en/about/"><span>ABOUT</span><PixelIcon name="external-link" size={18} /></a></div></div><div class="pixel-desk" role="img" aria-label="Pixel workstation with an article open on screen"><div class="window"><div class="window-bar"><i></i><i></i><i></i></div><div class="window-content"><div class="window-line"></div><div class="window-line"></div><div class="window-line"></div><div class="window-line"></div></div></div><div class="desk-base"></div></div></section>
     <section id="latest" class="section container"><div class="section-head"><div><div class="pixel-label">RECENT LOG</div><h2>Latest articles</h2></div><a href="/en/archive/">View all {posts.length}</a></div><div class="post-card-grid">{posts.slice(0, 4).map((post) => <PostCard client:load post={post} />)}</div></section>
   </main>
 </BaseLayout>

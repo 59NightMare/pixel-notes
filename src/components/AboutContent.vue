@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Avatar, Tag } from '@pixelium/web-vue'
+import PixelIcon from './PixelIcon.vue'
 
 const props = withDefaults(defineProps<{ lang?: 'zh' | 'en' }>(), { lang: 'zh' })
 const isEnglish = props.lang === 'en'
@@ -83,7 +84,7 @@ const content = isEnglish
         <p>{{ content.connectCopy }}</p>
         <nav class="about-links" :aria-label="content.connectTitle">
           <a v-for="link in content.links" :key="link.href" class="about-link" :href="link.href" :rel="link.href.startsWith('http') ? 'noreferrer' : undefined">
-            <small>{{ link.code }}</small><span><strong>{{ link.label }}</strong><em>{{ link.value }}</em></span><i aria-hidden="true">↗</i>
+            <small>{{ link.code }}</small><span><strong>{{ link.label }}</strong><em>{{ link.value }}</em></span><PixelIcon name="external-link" :size="18" />
           </a>
         </nav>
       </aside>

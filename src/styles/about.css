@@ -30,9 +30,9 @@
 .about-link>span{min-width:0;display:grid;line-height:1.35}
 .about-link strong{font-size:13px}
 .about-link em{margin-top:3px;color:var(--blog-muted);font-size:10px;font-style:normal;overflow-wrap:anywhere}
-.about-link>i{font-size:19px;font-style:normal;line-height:1;transition:transform 120ms steps(2,end)}
+.about-link>.site-icon{transition:transform 120ms steps(2,end)}
 .about-link:hover,.about-link:focus-visible{padding-inline:10px 6px;background:color-mix(in srgb,var(--blog-yellow) 28%,var(--blog-surface));box-shadow:inset 4px 0 var(--blog-green)}
-.about-link:hover>i,.about-link:focus-visible>i{transform:translate(2px,-2px)}
+.about-link:hover>.site-icon,.about-link:focus-visible>.site-icon{transform:translate(2px,-2px)}
 .about-link:active{padding-inline:7px 4px;background:color-mix(in srgb,var(--blog-yellow) 45%,var(--blog-surface))}
 html.dark .about-topics li{background:color-mix(in srgb,var(--blog-blue) 15%,var(--blog-surface))}
 

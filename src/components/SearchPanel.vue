@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
+import PixelIcon from './PixelIcon.vue'
 
 type SearchResult = {
   url: string
@@ -141,9 +142,9 @@ function clearSearch() {
       </div>
       <label for="site-search">{{ copy.label }}</label>
       <div class="search-input-row" :class="{ invalid: validationMessage }">
-        <span class="search-input-glyph" aria-hidden="true"></span>
+        <span class="search-input-glyph" aria-hidden="true"><PixelIcon name="search" :size="20" /></span>
         <input ref="input" id="site-search" v-model="query" type="search" :placeholder="copy.placeholder" autocomplete="off" spellcheck="false" :aria-invalid="Boolean(validationMessage)" aria-describedby="search-guidance">
-        <button v-if="query" class="search-clear" type="button" :aria-label="copy.clear" :title="copy.clear" @click="clearSearch"><span aria-hidden="true"></span></button>
+        <button v-if="query" class="search-clear" type="button" :aria-label="copy.clear" :title="copy.clear" @click="clearSearch"><PixelIcon name="close" :size="20" /></button>
       </div>
       <p id="search-guidance" class="search-guidance" :class="{ error: validationMessage || loadFailed }">{{ validationMessage || (loadFailed ? copy.unavailable : copy.guidance) }}</p>
     </div>
@@ -166,7 +167,7 @@ function clearSearch() {
           <h2>{{ result.meta.title }}</h2>
           <p v-html="result.excerpt"></p>
         </div>
-        <span class="search-result-open">{{ copy.open }} <i aria-hidden="true">↗</i></span>
+        <span class="search-result-open">{{ copy.open }} <PixelIcon name="external-link" :size="16" /></span>
       </a>
     </div>
 
@@ -174,7 +175,7 @@ function clearSearch() {
       <span aria-hidden="true">00</span><div><strong>{{ copy.noTitle }}</strong><p>{{ copy.noText }}</p></div>
     </div>
     <div v-else-if="!normalizedQuery" class="search-state search-initial">
-      <span aria-hidden="true">⌕</span><div><strong>{{ copy.initialTitle }}</strong><p>{{ copy.initialText }}</p></div>
+      <span aria-hidden="true"><PixelIcon name="search" :size="25" /></span><div><strong>{{ copy.initialTitle }}</strong><p>{{ copy.initialText }}</p></div>
     </div>
   </section>
 </template>

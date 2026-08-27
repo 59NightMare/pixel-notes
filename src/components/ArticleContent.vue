@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Avatar, Tag } from '@pixelium/web-vue'
 import MobileToc from './MobileToc.vue'
+import PixelIcon from './PixelIcon.vue'
 
 type Heading = { slug: string; text: string; depth: number }
 type Related = { id: string; title: string } | null
@@ -19,7 +20,7 @@ const copy = isEnglish
     <article data-pagefind-body>
       <div class="article-topline" data-pagefind-ignore>
         <nav class="article-breadcrumb" :aria-label="isEnglish ? 'Breadcrumb' : '面包屑导航'"><a :href="`${base}/`">{{ copy.home }}</a><span aria-hidden="true">/</span><a :href="`${base}/archive/`">{{ copy.archive }}</a></nav>
-        <a class="article-back" :href="`${base}/archive/`">{{ copy.back }} <span aria-hidden="true">↗</span></a>
+        <a class="article-back" :href="`${base}/archive/`">{{ copy.back }} <PixelIcon name="external-link" :size="15" /></a>
       </div>
       <header class="article-header">
         <div class="article-kicker" data-pagefind-ignore><Tag theme="warning" size="small">{{ post.category }}</Tag><span>ARTICLE FILE / READ_01</span></div>
@@ -41,8 +42,8 @@ const copy = isEnglish
       </figure>
       <div class="prose"><slot /></div>
       <nav class="article-nav" :aria-label="copy.nav" data-pagefind-ignore>
-        <a v-if="previous" :href="`${base}/posts/${previous.id}/`"><small>← {{ copy.previous }}</small><strong>{{ previous.title }}</strong><i aria-hidden="true">01</i></a>
-        <a v-if="next" :href="`${base}/posts/${next.id}/`"><small>{{ copy.next }} →</small><strong>{{ next.title }}</strong><i aria-hidden="true">02</i></a>
+        <a v-if="previous" :href="`${base}/posts/${previous.id}/`"><small><PixelIcon name="arrow-left" :size="14" /> {{ copy.previous }}</small><strong>{{ previous.title }}</strong><i aria-hidden="true">01</i></a>
+        <a v-if="next" :href="`${base}/posts/${next.id}/`"><small>{{ copy.next }} <PixelIcon name="arrow-right" :size="14" /></small><strong>{{ next.title }}</strong><i aria-hidden="true">02</i></a>
       </nav>
     </article>
     <aside class="article-aside" data-pagefind-ignore>

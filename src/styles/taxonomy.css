@@ -1,6 +1,6 @@
 /* Shared content actions and taxonomy navigation. */
 .site-action{min-width:156px;min-height:48px;padding:9px 13px;display:inline-flex;align-items:center;justify-content:space-between;gap:24px;border:2px solid var(--blog-ink);text-decoration:none;font-size:14px;font-weight:700;transition:transform 120ms steps(2,end),box-shadow 120ms steps(2,end),background-color 120ms steps(2,end)}
-.site-action i{font-size:18px;font-style:normal;line-height:1}
+.site-action .site-icon{font-size:18px;line-height:1}
 .hero-actions .site-action-primary{border-color:#171923;background:#171923;color:#fffaf0;box-shadow:4px 4px 0 var(--blog-yellow)}
 .site-action-secondary{background:var(--blog-surface);color:var(--blog-ink);box-shadow:4px 4px 0 var(--blog-green)}
 .site-action:hover,.site-action:focus-visible{transform:translate(-2px,-2px)}
@@ -19,7 +19,7 @@ html.dark .hero-actions .site-action-primary{border-color:#f7f1e3;background:#f7
 .topic-link:hover,.topic-link:focus-visible{padding-left:10px;background:color-mix(in srgb,var(--blog-yellow) 30%,var(--blog-surface));box-shadow:inset 4px 0 var(--blog-green)}
 .topic-link:active{padding-left:7px;background:color-mix(in srgb,var(--blog-yellow) 48%,var(--blog-surface))}
 .topic-all{min-height:42px;margin-top:13px;padding:9px 5px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid color-mix(in srgb,var(--blog-ink) 25%,transparent);text-decoration:none}
-.topic-all i{font-size:18px;font-style:normal}
+.topic-all .site-icon{font-size:18px}
 .topic-all:hover,.topic-all:focus-visible{color:color-mix(in srgb,var(--blog-green) 72%,var(--blog-ink))}
 
 .taxonomy-shell{padding-top:52px}

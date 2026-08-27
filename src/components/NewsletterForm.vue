@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Button, Input } from '@pixelium/web-vue'
+import PixelIcon from './PixelIcon.vue'
 
 const props = withDefaults(defineProps<{ username?: string; compact?: boolean; lang?: 'zh' | 'en' }>(), { lang: 'zh' })
 const email = ref('')
@@ -22,7 +23,7 @@ const action = props.username ? `https://buttondown.com/api/emails/embed-subscri
     </form>
     <p v-else class="service-note">
       <span>{{ props.lang === 'en' ? 'Email subscription is not open yet' : '邮件订阅暂未开放' }}</span>
-      <a class="newsletter-rss" href="/rss.xml">{{ props.lang === 'en' ? 'Follow via RSS' : '通过 RSS 关注' }} <span aria-hidden="true">→</span></a>
+      <a class="newsletter-rss" href="/rss.xml">{{ props.lang === 'en' ? 'Follow via RSS' : '通过 RSS 关注' }} <PixelIcon name="arrow-right" :size="17" /></a>
     </p>
   </section>
 </template>
