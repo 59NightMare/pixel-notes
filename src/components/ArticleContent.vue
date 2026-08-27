@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Avatar, Tag } from '@pixelium/web-vue'
 import MobileToc from './MobileToc.vue'
-import PixelatedImage from './PixelatedImage.vue'
 
 type Heading = { slug: string; text: string; depth: number }
 type Related = { id: string; title: string } | null
@@ -37,7 +36,7 @@ const copy = isEnglish
       </header>
       <div data-pagefind-ignore><MobileToc :headings="headings" :lang="lang" /></div>
       <figure class="article-figure" data-pagefind-ignore>
-        <PixelatedImage class="article-cover" :src="post.cover" :webp-src="post.cover.replace(/\.png$/, '.webp')" :alt="post.coverAlt" :width="960" :height="540" :pixel-size="8" loading="eager" />
+        <picture><source :srcset="post.cover.replace(/\.png$/, '.webp')" type="image/webp"><img class="article-cover" :src="post.cover" :alt="post.coverAlt" width="960" height="540"></picture>
         <figcaption><span>FIG.01</span>{{ post.coverAlt }}</figcaption>
       </figure>
       <div class="prose"><slot /></div>
