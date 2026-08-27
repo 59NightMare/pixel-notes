@@ -28,13 +28,21 @@ const toggleTheme = () => {
     // The active page still changes theme when browser storage is unavailable.
   }
 }
+const syncExternalTheme = (event: StorageEvent) => {
+  if (event.key !== 'pixel-notes-theme' || (event.newValue !== 'light' && event.newValue !== 'dark')) return
+  applyTheme(event.newValue)
+}
 
 onMounted(() => {
   mode.value = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
   document.addEventListener('keydown', closeMenuOnEscape)
+  window.addEventListener('storage', syncExternalTheme)
 })
 
-onBeforeUnmount(() => document.removeEventListener('keydown', closeMenuOnEscape))
+onBeforeUnmount(() => {
+  document.removeEventListener('keydown', closeMenuOnEscape)
+  window.removeEventListener('storage', syncExternalTheme)
+})
 </script>
 
 <template>
